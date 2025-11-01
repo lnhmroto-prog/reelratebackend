@@ -3,7 +3,6 @@ const path = require('path');
 const fs = require('fs');
 
 let credential;
-// Try root directory first (for Render deployment), then config folder (for local)
 const serviceAccountPath = fs.existsSync(path.join(__dirname, '..', 'firebase-service-account.json'))
   ? path.join(__dirname, '..', 'firebase-service-account.json')
   : path.join(__dirname, 'firebase-service-account.json');
@@ -44,3 +43,4 @@ const db = credential ? admin.firestore() : null;
 const auth = credential ? admin.auth() : null;
 
 module.exports = { admin, db, auth, isConfigured: !!credential };
+
