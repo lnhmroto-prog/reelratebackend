@@ -3,12 +3,13 @@ const path = require('path');
 const fs = require('fs');
 
 let credential;
+// Try root directory first (for Render deployment), then config folder (for local)
 const serviceAccountPath = fs.existsSync(path.join(__dirname, '..', 'firebase-service-account.json'))
   ? path.join(__dirname, '..', 'firebase-service-account.json')
   : path.join(__dirname, 'firebase-service-account.json');
 
 if (fs.existsSync(serviceAccountPath)) {
-  const serviceAccount = require('./firebase-service-account.json');
+  const serviceAccount = require(serviceAccountPath);
   credential = admin.credential.cert(serviceAccount);
   console.log('Firebase Admin initialized with service account file');
 } else if (process.env.FIREBASE_PRIVATE_KEY && process.env.FIREBASE_CLIENT_EMAIL) {
@@ -43,4 +44,3 @@ const db = credential ? admin.firestore() : null;
 const auth = credential ? admin.auth() : null;
 
 module.exports = { admin, db, auth, isConfigured: !!credential };
-
