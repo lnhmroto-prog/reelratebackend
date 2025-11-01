@@ -7,14 +7,6 @@ const morgan = require('morgan');
 
 dotenv.config();
 
-// Debug: Log environment variables status
-console.log('🔍 Environment Check:');
-console.log('NODE_ENV:', process.env.NODE_ENV);
-console.log('FIREBASE_PROJECT_ID:', process.env.FIREBASE_PROJECT_ID ? '✅ Set' : '❌ Missing');
-console.log('FIREBASE_CLIENT_EMAIL:', process.env.FIREBASE_CLIENT_EMAIL ? '✅ Set' : '❌ Missing');
-console.log('FIREBASE_PRIVATE_KEY:', process.env.FIREBASE_PRIVATE_KEY ? '✅ Set (length: ' + process.env.FIREBASE_PRIVATE_KEY.length + ')' : '❌ Missing');
-console.log('TMDB_API_KEY:', process.env.TMDB_API_KEY ? '✅ Set' : '❌ Missing');
-
 const app = express();
 const PORT = process.env.PORT || 5000;
 
