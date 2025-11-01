@@ -3,7 +3,10 @@ const path = require('path');
 const fs = require('fs');
 
 let credential;
-const serviceAccountPath = path.join(__dirname, 'firebase-service-account.json');
+// Try root directory first (for Render deployment), then config folder (for local)
+const serviceAccountPath = fs.existsSync(path.join(__dirname, '..', 'firebase-service-account.json'))
+  ? path.join(__dirname, '..', 'firebase-service-account.json')
+  : path.join(__dirname, 'firebase-service-account.json');
 
 if (fs.existsSync(serviceAccountPath)) {
   const serviceAccount = require('./firebase-service-account.json');
